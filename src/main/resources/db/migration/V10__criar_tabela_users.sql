@@ -1,0 +1,11 @@
+CREATE TABLE IF NOT EXISTS users (
+  codigo BIGINT(10) NOT NULL AUTO_INCREMENT,
+  user_codigo VARCHAR(45) NOT NULL,
+  nome VARCHAR(45) NOT NULL,
+  apelido VARCHAR(45) NOT NULL,
+  passwordEncrypted VARCHAR(45) NULL,
+  email VARCHAR(45) NOT NULL,
+  id_access_level BIGINT(10) NOT NULL,
+  PRIMARY KEY (codigo),
+  FOREIGN KEY (id_access_level) REFERENCES access_level(codigo)ON DELETE CASCADE ON UPDATE CASCADE
+)ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;

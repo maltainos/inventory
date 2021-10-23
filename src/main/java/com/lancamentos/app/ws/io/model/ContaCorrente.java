@@ -1,15 +1,14 @@
 package com.lancamentos.app.ws.io.model;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -21,46 +20,19 @@ import lombok.ToString;
 @EqualsAndHashCode
 @ToString
 @Entity
-@Table(name = "pessoas")
-public class Pessoa {
+@Table(name = "account")
+public class ContaCorrente {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 	
 	@Column(nullable = false, unique = true, length = 30)
-	private String pessoaCodigo;
+	private String contaCodigo;
 	
 	@NotNull
-	@Size(min = 3, max = 30)
-	@NotEmpty
-	private String nome;
-	
-	@NotNull
-	@Size(min = 3, max = 15)
-	@NotEmpty
-	private String apelido;
-	
-	@Embedded
-	private Endereco endereco;
-	
-	@NotNull
-	private boolean ativo;
-	
-	public boolean isInativo() {
-		return !ativo;
-	}
+	private BigDecimal saldoConta;
 }
-
-
-
-
-
-
-
-
-
-
 
 
 

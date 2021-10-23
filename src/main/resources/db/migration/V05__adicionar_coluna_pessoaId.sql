@@ -1,0 +1,1 @@
+ALTER TABLE pessoas ADD COLUMN pessoa_codigo VARCHAR(30);

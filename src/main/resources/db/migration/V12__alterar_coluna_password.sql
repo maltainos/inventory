@@ -1,0 +1,1 @@
+ALTER TABLE users CHANGE COLUMN passwordEncrypted encrypted_Password VARCHAR(120);

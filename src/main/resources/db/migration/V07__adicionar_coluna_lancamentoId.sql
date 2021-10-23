@@ -1,0 +1,1 @@
+ALTER TABLE lancamentos ADD COLUMN lancamento_codigo VARCHAR(30);

@@ -1,0 +1,1 @@
+ALTER TABLE categorias ADD COLUMN categoria_codigo VARCHAR(30);
