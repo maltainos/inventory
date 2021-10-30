@@ -1,4 +1,4 @@
-package com.lancamentos.app.ws.io.service;
+package com.lancamentos.app.ws.service;
 
 import java.math.BigDecimal;
 import java.util.List;

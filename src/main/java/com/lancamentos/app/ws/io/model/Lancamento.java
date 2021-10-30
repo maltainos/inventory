@@ -31,7 +31,7 @@ public class Lancamento {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codigo;
+	private Long id;
 	
 	@Column(nullable = false, unique = true, length = 30)
 	private String lancamentoCodigo;
@@ -57,12 +57,12 @@ public class Lancamento {
 	
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name = "codigo_pessoa")
+	@JoinColumn(name = "pessoa_id")
 	private Pessoa pessoa;
 	
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name = "codigo_categoria")
+	@JoinColumn(name = "categoria_id")
 	private Categoria categoria;
 }
 

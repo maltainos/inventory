@@ -1,4 +1,4 @@
-package com.lancamentos.app.ws.io.service.exception;
+package com.lancamentos.app.ws.service.exception;
 
 public class PessoaInexistenteOuInativoException extends RuntimeException {
 

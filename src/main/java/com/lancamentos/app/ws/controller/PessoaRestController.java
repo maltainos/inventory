@@ -1,4 +1,4 @@
-package com.lancamentos.app.ws.io.resource;
+package com.lancamentos.app.ws.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,13 +21,13 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lancamentos.app.ws.event.RecursoCriadoEvent;
-import com.lancamentos.app.ws.io.service.PessoaService;
+import com.lancamentos.app.ws.service.PessoaService;
 import com.lancamentos.app.ws.io.model.Pessoa;
 import com.lancamentos.app.ws.io.repository.PessoaRepository;
 
 @RestController
 @RequestMapping(path = "pessoas")
-public class PessoaResource {
+public class PessoaRestController {
 	
 	@Autowired
 	private PessoaService pessoaService;
@@ -47,7 +47,7 @@ public class PessoaResource {
 	public ResponseEntity<Pessoa> criar(@Valid @RequestBody Pessoa pessoa, 
 			HttpServletResponse response){
 		Pessoa pessoaSalva = pessoaRepository.save(pessoa);
-		publisher.publishEvent(new RecursoCriadoEvent(this, response, pessoaSalva.getCodigo()));
+		publisher.publishEvent(new RecursoCriadoEvent(this, response, pessoaSalva.getId()));
 		return ResponseEntity.status(HttpStatus.CREATED).body(pessoaSalva);
 	}
 	

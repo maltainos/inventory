@@ -1,39 +1,42 @@
 package com.lancamentos.app.ws.io.model;
 
-import java.math.BigDecimal;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
-import lombok.EqualsAndHashCode;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
-@ToString
 @Entity
-@Table(name = "account")
-public class ContaCorrente {
+@Table(name = "roles")
+public class Role {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(nullable = false, unique = true, length = 30)
-	private String contaId;
+	@NotBlank
+	@Size(min = 4, max = 45)
+	@Column(nullable = false, unique = true, length = 45)
+	private String nome;
 	
-	@NotNull
-	private BigDecimal saldoConta;
-}
+	private String description;
 
+}
 
 
 

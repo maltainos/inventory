@@ -1,4 +1,4 @@
-package com.lancamentos.app.ws.io.resource;
+package com.lancamentos.app.ws.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,7 +25,7 @@ import com.lancamentos.app.ws.io.repository.CategoriaRepository;
 
 @RestController
 @RequestMapping(path = "/categorias")
-public class CategoriaResource {
+public class CategoriaRestController {
 	
 	@Autowired
 	private CategoriaRepository categoriaRepository;
@@ -42,7 +42,7 @@ public class CategoriaResource {
 	@PostMapping
 	public ResponseEntity<Categoria> criar(@Valid @RequestBody Categoria categoria, HttpServletResponse response) {
 		Categoria categoriaSalva = categoriaRepository.save(categoria);
-		publisher.publishEvent(new RecursoCriadoEvent(this, response, categoriaSalva.getCodigo()));
+		publisher.publishEvent(new RecursoCriadoEvent(this, response, categoriaSalva.getId()));
 		return ResponseEntity.status(HttpStatus.CREATED).body(categoriaSalva);
 	}
 	

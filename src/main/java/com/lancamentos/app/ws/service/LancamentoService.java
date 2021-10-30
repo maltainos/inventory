@@ -1,4 +1,4 @@
-package com.lancamentos.app.ws.io.service;
+package com.lancamentos.app.ws.service;
 
 import java.util.Optional;
 
@@ -16,7 +16,7 @@ import com.lancamentos.app.ws.io.model.TipoLancamento;
 import com.lancamentos.app.ws.io.repository.LancamentoRepository;
 import com.lancamentos.app.ws.io.repository.PessoaRepository;
 import com.lancamentos.app.ws.io.repository.filter.LancamentoFilter;
-import com.lancamentos.app.ws.io.service.exception.PessoaInexistenteOuInativoException;
+import com.lancamentos.app.ws.service.exception.PessoaInexistenteOuInativoException;
 import com.lancamentos.app.ws.shared.MyUtils;
 
 @Service
@@ -50,7 +50,7 @@ public class LancamentoService {
 
 	public Lancamento salvar(@Valid Lancamento lancamento) {
 		
-		Optional<Pessoa> pessoa = pessoaRepository.findById(lancamento.getPessoa().getCodigo());
+		Optional<Pessoa> pessoa = pessoaRepository.findById(lancamento.getPessoa().getId());
 		
 		System.out.println(pessoa.get().isInativo());;
 		if(!pessoa.isPresent() || pessoa.get().isInativo())

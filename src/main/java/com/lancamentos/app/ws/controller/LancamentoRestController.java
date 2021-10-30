@@ -1,4 +1,4 @@
-package com.lancamentos.app.ws.io.resource;
+package com.lancamentos.app.ws.controller;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,12 +27,12 @@ import com.lancamentos.app.ws.event.RecursoCriadoEvent;
 import com.lancamentos.app.ws.execptionhandler.Erro;
 import com.lancamentos.app.ws.io.model.Lancamento;
 import com.lancamentos.app.ws.io.repository.filter.LancamentoFilter;
-import com.lancamentos.app.ws.io.service.LancamentoService;
-import com.lancamentos.app.ws.io.service.exception.PessoaInexistenteOuInativoException;
+import com.lancamentos.app.ws.service.LancamentoService;
+import com.lancamentos.app.ws.service.exception.PessoaInexistenteOuInativoException;
 
 @RestController
 @RequestMapping(path = "/lancamentos")
-public class LancamentoResource {
+public class LancamentoRestController {
 	
 	@Autowired
 	private LancamentoService lancamentoService;
@@ -59,7 +59,7 @@ public class LancamentoResource {
 		
 		Lancamento lancamentoSalva = lancamentoService.salvar(lancamento);
 		
-		publisher.publishEvent(new RecursoCriadoEvent(this, response, lancamentoSalva.getCodigo()));
+		publisher.publishEvent(new RecursoCriadoEvent(this, response, lancamentoSalva.getId()));
 		
 		return ResponseEntity.status(HttpStatus.CREATED).body(lancamentoSalva);
 	}
