@@ -9,9 +9,13 @@ import org.springframework.stereotype.Service;
 
 import com.lancamentos.app.ws.io.model.Pessoa;
 import com.lancamentos.app.ws.io.repository.PessoaRepository;
+import com.lancamentos.app.ws.shared.MyUtils;
 
 @Service
 public class PessoaService {
+	
+	@Autowired
+	private MyUtils myUtils;
 
 	@Autowired
 	private PessoaRepository pessoaRepository;
@@ -20,7 +24,6 @@ public class PessoaService {
 		Optional<Pessoa> pessoaSalva = buscarPessoaPeloCodigo(codigo);
 
 		BeanUtils.copyProperties(pessoa, pessoaSalva.get(), "codigo");
-
 		return pessoaRepository.save(pessoaSalva.get());
 	}
 

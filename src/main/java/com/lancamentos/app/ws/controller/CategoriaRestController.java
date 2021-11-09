@@ -22,10 +22,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.lancamentos.app.ws.event.RecursoCriadoEvent;
 import com.lancamentos.app.ws.io.model.Categoria;
 import com.lancamentos.app.ws.io.repository.CategoriaRepository;
+import com.lancamentos.app.ws.shared.MyUtils;
 
 @RestController
 @RequestMapping(path = "/categorias")
 public class CategoriaRestController {
+	
+	@Autowired
+	private MyUtils myUtils;
 	
 	@Autowired
 	private CategoriaRepository categoriaRepository;
@@ -41,6 +45,7 @@ public class CategoriaRestController {
 	
 	@PostMapping
 	public ResponseEntity<Categoria> criar(@Valid @RequestBody Categoria categoria, HttpServletResponse response) {
+		categoria.setCategoriaCodigo(myUtils.generatedString(30));
 		Categoria categoriaSalva = categoriaRepository.save(categoria);
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, categoriaSalva.getId()));
 		return ResponseEntity.status(HttpStatus.CREATED).body(categoriaSalva);

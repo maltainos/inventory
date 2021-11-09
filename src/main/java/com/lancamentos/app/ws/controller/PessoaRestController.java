@@ -22,12 +22,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.lancamentos.app.ws.event.RecursoCriadoEvent;
 import com.lancamentos.app.ws.service.PessoaService;
+import com.lancamentos.app.ws.shared.MyUtils;
 import com.lancamentos.app.ws.io.model.Pessoa;
 import com.lancamentos.app.ws.io.repository.PessoaRepository;
 
 @RestController
 @RequestMapping(path = "pessoas")
 public class PessoaRestController {
+	
+	@Autowired
+	private MyUtils myUtils;
 	
 	@Autowired
 	private PessoaService pessoaService;
@@ -46,6 +50,8 @@ public class PessoaRestController {
 	@PostMapping
 	public ResponseEntity<Pessoa> criar(@Valid @RequestBody Pessoa pessoa, 
 			HttpServletResponse response){
+		pessoa.setPessoaCodigo(myUtils.generatedString(30));
+		System.out.println(pessoa.getPessoaCodigo());
 		Pessoa pessoaSalva = pessoaRepository.save(pessoa);
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, pessoaSalva.getId()));
 		return ResponseEntity.status(HttpStatus.CREATED).body(pessoaSalva);
